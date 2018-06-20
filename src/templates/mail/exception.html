@@ -1,0 +1,94 @@
+{% set mainBgColor = '#cc5643' %}
+{% set mainFontColor = '#ffffff' %}
+{% set firstRowWidth = '180px' %}
+
+<div style="font-family: Verdana, Arial;">
+    <h1 style="background:{{ mainBgColor }}; color:{{ mainFontColor }};padding:5px;">Resume</h1>
+    <table cellspacing="1" width="100%">
+        <tr style="padding: 4px;spacing: 0;text-align: left;">
+            <th style="background:#cccccc" width="{{ firstRowWidth }}">Exception:</th>
+            <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ exceptionName }}</td>
+        </tr>
+        <tr style="padding: 4px;spacing: 0;text-align: left;">
+            <th style="background:#cccccc" width="{{ firstRowWidth }}">Message:</th>
+            <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ exception.message }}</td>
+        </tr>
+        <tr style="padding: 4px;spacing: 0;text-align: left;">
+            <th style="background:#cccccc" width="{{ firstRowWidth }}">Environment:</th>
+            <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ getenv('ENVIRONMENT') }}</td>
+        </tr>
+        <tr style="padding: 4px;spacing: 0;text-align: left;">
+            <th style="background:#cccccc" width="{{ firstRowWidth }}">File:</th>
+            <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ exception.file }}</td>
+        </tr>
+        <tr style="padding: 4px;spacing: 0;text-align: left;">
+            <th style="background:#cccccc" width="{{ firstRowWidth }}">Line:</th>
+            <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ exception.line }}</td>
+        </tr>
+        <tr style="padding: 4px;spacing: 0;text-align: left;">
+            <th style="background:#cccccc" width="{{ firstRowWidth }}">Code:</th>
+            <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ exception.code }}</td>
+        </tr>
+        <tr style="padding: 4px;spacing: 0;text-align: left;">
+            <th style="background:#cccccc" width="{{ firstRowWidth }}">Request URI:</th>
+            <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ serverVars['REQUEST_SCHEME']~'://'~serverVars['HTTP_HOST']~serverVars['REQUEST_URI'] }}</td>
+        </tr>
+        <tr style="padding: 4px;spacing: 0;text-align: left;">
+            <th style="background:#cccccc" width="{{ firstRowWidth }}">Generated at:</th>
+            <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ "now"|date('Y-m-d H:i:s') }}</td>
+        </tr>
+    </table>
+
+    <h1 style="background:{{ mainBgColor }}; color:{{ mainFontColor }};padding:5px;">Exception</h1>
+    <table cellspacing="1" width="100%">
+        <tr style="padding: 4px;spacing: 0;text-align: left;">
+            <th style="background:#cccccc" width="{{ firstRowWidth }}">Trace:</th>
+            <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ exception.getTraceAsString()|nl2br }}</td>
+        </tr>
+    </table>
+
+    {% if pluginSettings.serverVars %}
+        <h1 style="background:{{ mainBgColor }}; color:{{ mainFontColor }};padding:5px;">Server</h1>
+        <table cellspacing="1" width="100%">
+            {% for key, var in serverVars %}
+                <tr style="padding: 4px;spacing: 0;text-align: left;">
+                    <th style="background:#cccccc" width="{{ firstRowWidth }}">{{ key }}:</th>
+                    <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ var }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    {% if pluginSettings.userVars %}
+        <h1 style="background:{{ mainBgColor }}; color:{{ mainFontColor }};padding:5px;">User</h1>
+        <table cellspacing="1" width="100%">
+            <tr style="padding: 4px;spacing: 0;text-align: left;">
+                <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">
+                    <pre style="font-family: Verdana, Arial;">{{ userVars }}</pre>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+
+    {% if pluginSettings.sessionVars %}
+        <h1 style="background:{{ mainBgColor }}; color:{{ mainFontColor }};padding:5px;">Session</h1>
+        <table cellspacing="1" width="100%">
+            <tr style="padding: 4px;spacing: 0;text-align: left;">
+                <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">
+                    <pre style="font-family: Verdana, Arial;">{{ sessionVars }}</pre>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+
+    {% if pluginSettings.cookieVars %}
+        <h1 style="background:{{ mainBgColor }}; color:{{ mainFontColor }};padding:5px;">Cookie</h1>
+        <table cellspacing="1" width="100%">
+            <tr style="padding: 4px;spacing: 0;text-align: left;">
+                <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">
+                    <pre style="font-family: Verdana, Arial;">{{ cookieVars }}</pre>
+                </td>
+            </tr>
+        </table>
+    {% endif %}
+</div>

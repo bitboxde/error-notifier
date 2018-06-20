@@ -1,0 +1,118 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Error Notifier plugin for Craft CMS 3.x
+ *
+ * Error Notifier Settings.twig
+ *
+ * @author    bitbox GmbH & Co. KG
+ * @copyright Copyright (c) 2018 bitbox GmbH & Co. KG
+ * @link      https://www.bitbox.de
+ * @package   ErrorNotifier
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+<h1>{{ "General settings"|t('error-notifier') }}</h1>
+
+{{ forms.lightswitchField({
+    label: 'Plugin is enabled'|t('error-notifier'),
+    instructions: 'Disable to stop sending emails.'|t('error-notifier'),
+    id: 'enabled',
+    name: 'enabled',
+    value: "1",
+    errors: settings.getErrors('enabled'),
+    on: (settings['enabled'] is defined) ? settings['enabled'] : "",
+}) }}
+
+{{ forms.textField({
+    label: 'Environments'|t('error-notifier'),
+    instructions: 'Enter a comma separated list of environments, where Error Notifier should send emails.'|t('error-notifier'),
+    id: 'environments',
+    name: 'environments',
+    errors: settings.getErrors('environments'),
+    value: settings['environments']})
+}}
+
+{{ forms.textField({
+    label: 'Email recievers'|t('error-notifier'),
+    instructions: 'Enter a comma separated list of recievers. Note: If your enviroment has the "testToEmailAddress" setting, emails will only be sent to the "testToEmailAddress".'|t('error-notifier'),
+    id: 'recievers',
+    name: 'recievers',
+    errors: settings.getErrors('recievers'),
+    value: settings['recievers']})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Check 404 "Not Found"'|t('error-notifier'),
+    instructions: 'If enabled, an email will be send on 404 Not Found. Note: This could cause massive email traffic.'|t('error-notifier'),
+    id: 'notFound',
+    name: 'notFound',
+    value: "1",
+    errors: settings.getErrors('notFound'),
+    on: (settings['notFound'] is defined) ? settings['notFound'] : "",
+}) }}
+
+<hr>
+
+<h1>{{ "Email settings"|t('error-notifier') }}</h1>
+
+{{ forms.textField({
+    label: 'Email sender'|t('error-notifier'),
+    instructions: 'Sender email address.'|t('error-notifier'),
+    id: 'sender',
+    name: 'sender',
+    errors: settings.getErrors('sender'),
+    value: settings['sender']})
+}}
+
+{{ forms.textField({
+    label: 'Email prefix'|t('error-notifier'),
+    instructions: 'Define a prefix for the email subject.'|t('error-notifier'),
+    id: 'emailPrefix',
+    name: 'emailPrefix',
+    errors: settings.getErrors('emailPrefix'),
+    value: settings['emailPrefix']})
+}}
+
+{{ forms.lightswitchField({
+    label: 'Insert server informations'|t('error-notifier'),
+    instructions: 'Based on $_SERVER'|t('error-notifier'),
+    id: 'serverVars',
+    name: 'serverVars',
+    value: "1",
+    errors: settings.getErrors('serverVars'),
+    on: (settings['serverVars'] is defined) ? settings['serverVars'] : "",
+}) }}
+
+{{ forms.lightswitchField({
+    label: 'Insert user informations'|t('error-notifier'),
+    instructions: 'Based on Craft::$app->getUser()'|t('error-notifier'),
+    id: 'userVars',
+    name: 'userVars',
+    value: "1",
+    errors: settings.getErrors('userVars'),
+    on: (settings['userVars'] is defined) ? settings['userVars'] : "",
+}) }}
+
+{{ forms.lightswitchField({
+    label: 'Insert session informations'|t('error-notifier'),
+    instructions: 'Based on $_SESSION'|t('error-notifier'),
+    id: 'sessionVars',
+    name: 'sessionVars',
+    value: "1",
+    errors: settings.getErrors('sessionVars'),
+    on: (settings['sessionVars'] is defined) ? settings['sessionVars'] : "",
+}) }}
+
+{{ forms.lightswitchField({
+    label: 'Insert cookie informations'|t('error-notifier'),
+    instructions: 'Based on $_COOKIE'|t('error-notifier'),
+    id: 'cookieVars',
+    name: 'cookieVars',
+    value: "1",
+    errors: settings.getErrors('cookieVars'),
+    on: (settings['cookieVars'] is defined) ? settings['cookieVars'] : "",
+}) }}

@@ -1,0 +1,40 @@
+{
+    "name": "bitboxde/error-notifier",
+    "description": "Sending an email if an error occurred.",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "error notifier"
+    ],
+    "support": {
+        "docs": "https://github.com/bitboxde/error-notifier/blob/master/README.md",
+        "issues": "https://github.com/bitboxde/error-notifier/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "bitbox GmbH & Co. KG",
+            "homepage": "https://www.bitbox.de"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0-RC1"
+    },
+    "autoload": {
+        "psr-4": {
+          "bitboxde\\errornotifier\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Error Notifier",
+        "handle": "error-notifier",
+        "hasCpSettings": true,
+        "hasCpSection": false,
+        "changelogUrl": "https://raw.githubusercontent.com/bitboxde/error-notifier/master/CHANGELOG.md",
+        "class": "bitboxde\\errornotifier\\ErrorNotifier"
+    }
+}
