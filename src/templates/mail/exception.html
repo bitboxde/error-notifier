@@ -53,7 +53,7 @@
             {% for key, var in serverVars %}
                 <tr style="padding: 4px;spacing: 0;text-align: left;">
                     <th style="background:#cccccc" width="{{ firstRowWidth }}">{{ key }}:</th>
-                    <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ var }}</td>
+                    <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">{{ var|join(', ') }}</td>
                 </tr>
             {% endfor %}
         </table>
@@ -64,7 +64,7 @@
         <table cellspacing="1" width="100%">
             <tr style="padding: 4px;spacing: 0;text-align: left;">
                 <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">
-                    <pre style="font-family: Verdana, Arial;">{{ userVars }}</pre>
+                    <pre style="font-family: Verdana, Arial;">{{ userVars|join(', ') }}</pre>
                 </td>
             </tr>
         </table>
@@ -75,7 +75,7 @@
         <table cellspacing="1" width="100%">
             <tr style="padding: 4px;spacing: 0;text-align: left;">
                 <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">
-                    <pre style="font-family: Verdana, Arial;">{{ sessionVars }}</pre>
+                    <pre style="font-family: Verdana, Arial;">{{ sessionVars|join(', ') }}</pre>
                 </td>
             </tr>
         </table>
@@ -86,7 +86,7 @@
         <table cellspacing="1" width="100%">
             <tr style="padding: 4px;spacing: 0;text-align: left;">
                 <td style="padding: 4px;spacing: 0;text-align: left;background:#eeeeee">
-                    <pre style="font-family: Verdana, Arial;">{{ cookieVars }}</pre>
+                    <pre style="font-family: Verdana, Arial;">{{ cookieVars|join(', ') }}</pre>
                 </td>
             </tr>
         </table>
