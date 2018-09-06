@@ -2,7 +2,7 @@
     "name": "bitboxde/error-notifier",
     "description": "Sending an email if an error occurred.",
     "type": "craft-plugin",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "keywords": [
         "craft",
         "cms",

@@ -106,6 +106,10 @@ class HandleException extends Component
 
     protected function getSessionVars()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
         return print_r($_SESSION, true);
     }
 
