@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3 - 2019-01-16
+### Fixed
+- Fixed Undefined index Exception
+
 ## 1.0.2 - 2018-09-06
 ### Fixed
 - Check if $ _SESSION is set, to avoid "Undefined variable: _SESSION in.."

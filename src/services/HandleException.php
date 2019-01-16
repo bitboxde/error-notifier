@@ -45,13 +45,15 @@ class HandleException extends Component
             );
             $view->setTemplatesPath($oldTemplatesPath);
 
-            $message = new Message();
-            $message->setFrom([$this->pluginSettings->sender => $this->settings['fromName']]);
-            $message->setTo($recievers);
-            $message->setSubject($this->pluginSettings->emailPrefix .' - ' . $this->settings['fromName'] . ' - ' . $this->getExceptionName($exception));
-            $message->setHtmlBody($body);
+            if(array_key_exists('fromName', $this->settings)) {
+                $message = new Message();
+                $message->setFrom([$this->pluginSettings->sender => $this->settings['fromName']]);
+                $message->setTo($recievers);
+                $message->setSubject($this->pluginSettings->emailPrefix .' - ' . $this->settings['fromName'] . ' - ' . $this->getExceptionName($exception));
+                $message->setHtmlBody($body);
 
-            Craft::$app->mailer->send($message);
+                Craft::$app->mailer->send($message);
+            }
         }
     }
 
