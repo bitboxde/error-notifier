@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4 - 2019-06-13
+### Fixed
+- Define REQUEST_SCHEME not by $_SERVER to support Apache 2.2, LightSpeed and IIS
+
 ## 1.0.3 - 2019-01-16
 ### Fixed
 - Fixed Undefined index Exception

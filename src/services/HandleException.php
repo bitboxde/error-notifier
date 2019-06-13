@@ -28,7 +28,7 @@ class HandleException extends Component
     {
         $recievers = $this->getRecievers();
 
-        if($recievers !== false && $this->pluginSettings->enabled && $this->checkEnvironment() && $this->checkNotFound($exception)) {
+        if ($recievers !== false && $this->pluginSettings->enabled && $this->checkEnvironment() && $this->checkNotFound($exception)) {
             $view = Craft::$app->getView();
             $oldTemplatesPath = $view->getTemplatesPath();
             $view->setTemplatesPath(ErrorNotifier::getInstance()->getBasePath());
@@ -45,11 +45,11 @@ class HandleException extends Component
             );
             $view->setTemplatesPath($oldTemplatesPath);
 
-            if(array_key_exists('fromName', $this->settings)) {
+            if (array_key_exists('fromName', $this->settings)) {
                 $message = new Message();
                 $message->setFrom([$this->pluginSettings->sender => $this->settings['fromName']]);
                 $message->setTo($recievers);
-                $message->setSubject($this->pluginSettings->emailPrefix .' - ' . $this->settings['fromName'] . ' - ' . $this->getExceptionName($exception));
+                $message->setSubject($this->pluginSettings->emailPrefix . ' - ' . $this->settings['fromName'] . ' - ' . $this->getExceptionName($exception));
                 $message->setHtmlBody($body);
 
                 Craft::$app->mailer->send($message);
@@ -59,7 +59,7 @@ class HandleException extends Component
 
     protected function getRecievers()
     {
-        if($this->pluginSettings->recievers !== '') {
+        if ($this->pluginSettings->recievers !== '') {
             return array_map('trim', explode(',', $this->pluginSettings->recievers));
         }
 
@@ -68,7 +68,7 @@ class HandleException extends Component
 
     protected function checkEnvironment()
     {
-        if(in_array($this->environment, $this->pluginEnvironments, true)) {
+        if (in_array($this->environment, $this->pluginEnvironments, true)) {
             return true;
         }
 
@@ -77,7 +77,7 @@ class HandleException extends Component
 
     protected function checkNotFound($exception)
     {
-        if($this->pluginSettings->notFound !== '1' && $this->getExceptionName($exception) === 'Not Found') {
+        if ($this->pluginSettings->notFound !== '1' && $this->getExceptionName($exception) === 'Not Found') {
             return false;
         }
 
@@ -95,10 +95,25 @@ class HandleException extends Component
     {
         $serverVars = $_SERVER;
 
+        $serverVars['REQUEST_SCHEME'] = $this->getRequestScheme();
+
         // clean some fields
         unset($serverVars['DB_PASSWORD'], $serverVars['HTTP_COOKIE']);
 
         return $serverVars;
+    }
+
+    protected function getRequestScheme()
+    {
+        if (isset($_SERVER['HTTPS']) && ('on' === strtolower($_SERVER['HTTPS']) || '1' == $_SERVER['HTTPS'])) {
+            return 'https';
+        }
+
+        if (isset($_SERVER['SERVER_PORT']) && ('443' == $_SERVER['SERVER_PORT'])) {
+            return 'https';
+        }
+
+        return 'http';
     }
 
     protected function getUserVars()
